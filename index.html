@@ -1,0 +1,1089 @@
+<html>
+<head>
+  <title>Request Subscription</title>
+  <!-- Bootstrap core CSS -->
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body style="background-color:azure;">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        
+        <h2>Subscription Request Form</h2>
+        <h3>Please fill the form and submit to request a subscription</h3>
+        <br />
+        <form id="requestForm">
+          <div class="form-group">
+            <fieldset style="border: 1px solid rgb(0, 174, 255)">
+              <legend
+                style="width:auto; margin-bottom: 0px; font-size: 12px; text-align: left; font-weight: bold; color: #1f497d;">
+                </legend>
+            <table  style="width:80%; padding-left: 20%; border-collapse: separate;border-spacing: 0 15px;">
+              <td>
+                <tr>
+                  <td><label for="InputSubscriptionType">Subscription Type :</label></td>
+                  <td>
+                    <input required type="text" class="form-control" id="InputSubscriptionType" placeholder="Subscription Type">
+                    <p><span id="InputFunction" style="color: red;"></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><label for="InputEnvironmentType">Environment Type :</label></td>
+                    <td>
+                      <input required type="text" class="form-control" id="InputEnvironmentType" placeholder="Environment Type">
+                      <p><span id="InputFunction" style="color: red;"></span></p>
+                    </td>
+                </tr>
+                <tr>
+                  <td><label for="InputFunction">Function (BU) :</label></td>
+                    <td>
+                      <input required type="text" class="form-control" id="InputFunction" placeholder="Function (BU)">
+                      <p><span id="InputFunction" style="color: red;"></span></p>
+                    </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="InputSubFunction">Sub-Function (Sub-BU):</label>
+                  </td>
+                  <td>
+                    <input required type="text" class="form-control" id="InputSubFunction" placeholder="Sub Function (Sub BU)">
+                    <p><span id="InputSubFunction" style="color: red;"></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="InputServiceUnit">Service Unit :</label>
+                  </td>
+                  <td>
+                    <input required type="text" class="form-control" id="InputServiceUnit" placeholder="Service Unit">
+            <p><span id="ServiceUnitValidation" style="color: red;"></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><label for="InputEmail">Contact Email address :</label></td>
+                  <td><input required type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp"
+                    placeholder="owner@abc.com"></td>
+                </tr>
+                <tr>
+                  <td><label for="InputAccountPrefix">Project Name Prefix :</label></td>
+                  <td>
+                    <input required type="text" class="form-control" id="InputAccountPrefix" placeholder="OneDeliver (OD)">
+                    <p><span id="InputAccountPrefix" style="color: red;"></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><label for="InputAppName">Project Name :</label></td>
+                  <td><input required type="text" onblur = "validateProjectName()"  class="form-control" id="InputAppName" placeholder="Name">
+                    <!-- <small id="InputAppNameHelp" class="form-text text-muted">The actual name of resources generated will
+                      differ but will be based upon this name</small> -->
+                      <span id="errorMsg" style="color:red"></span></td>
+                </tr>
+                <tr>
+                  <td><label for="InputUID">UID :</label></td>
+                  <td><input required type="text" class="form-control" id="InputUID" placeholder="Enter the UID" minlength="6"
+                    maxlength="12" disabled>
+                  <small id="InputUIDHelp" class="form-text text-muted">Minimum length is 6 characters(max 12)</small></td>
+                </tr>
+                <tr>
+                  <td><label for="InputVendor">Vendor :</label></td>
+                  <td>
+                    <input required type="text" class="form-control" id="InputVendor" placeholder="Azure">
+                    <p><span id="InputVendor" style="color: red;"></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><label for="InputPrimaryRegion">Primary Region :</label></td>
+                  <td>
+                    <input required type="text" class="form-control" id="InputPrimaryRegion" placeholder="CENTRAL US">
+                    <p><span id="InputPrimaryRegion" style="color: red;"></span></p>
+                  </td>
+                </tr>
+              </td>
+            </table>
+            </fieldset>
+          </div>
+          <fieldset style="border: 1px solid rgb(0, 174, 255)">
+            <legend
+              style="width:auto; margin-bottom: 0px; font-size: 12px; text-align: left; font-weight: bold; color: #1f497d;">
+              Regular VNET - Primary Region</legend>
+              <table  style="width:80%; padding-left: 20%; border-collapse: separate;border-spacing: 0 15px;">
+                <td>
+                <tr>
+                  <td><label for="InputPrimaryVNET">Enable VNET : <span
+                    id="primary_region"><b>&nbsp;&nbsp;</b></span></label></td>
+                  <td style="width:58%"><select class="form-control" id="InputPrimaryVNET" >
+                    <option value="yes" selected="selected">Yes </option>
+                    <option value="no">No</option>
+                  </select></td>
+                </tr>
+                <tr>
+                  <td><label for="InputPrimaryIP">VNET CIDR :</label></td>
+                  <td><div class="input-group">
+                    <input type="text" style="width:207% ;" class="form-control" id="InputPrimaryIP" placeholder="" disabled>
+                  </div></td>
+                </tr>
+                <tr>
+                  <td><label for="InputPrimaryAZ">Subnet count :</label></td>
+                  <td>
+                    <input required type="text" class="form-control" id="InputPrimaryAZ" placeholder=" Enter the count as 1,2 or 3">
+                    <p><span id="InputPrimaryAZ" style="color: red;"></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><label for="InputPrimarySubnetsPrivate">VNET Private Subnet CIDR :</label></td>
+                  <td><input type="text" class="form-control" id="InputPrimarySubnetsPrivate" placeholder="" disabled><p><span id="primaryprivatesubnetvalidation" style="color: red;"></span></p></td>
+                </tr>
+                <tr>
+                  <td><label for="InputPrimarySubnetsPublic">VNET Public Subnet CIDR :</label></td>
+                  <td><input type="text" class="form-control" id="InputPrimarySubnetsPublic" placeholder="" disabled><p><span id="primarypublicsubnetvalidation" style="color: red;"></span></p></td>
+                </tr>
+                </td>
+              </table>
+          </fieldset>
+          <br>
+          <fieldset style="border: 1px solid rgb(0, 174, 255)">
+            <legend
+              style="width:auto; margin-bottom: 0px; font-size: 12px; text-align: left; font-weight: bold; color: #1f497d;">
+              Regular VNET - Secondary Region</legend>
+              <table  style="width:80%; padding-left: 20%; border-collapse: separate;border-spacing: 0 15px;">
+                <td>
+                <tr>
+                  <td><label for="InputSecondaryVNET">Enable VNET : <span
+                    id="secondary_region"><b>&nbsp;&nbsp;</b></span></label></td>
+                  <td style="width:58%"><select class="form-control" id="InputSecondaryVNET" >
+                    <option value="yes">Yes </option>
+                    <option value="no" selected="selected">No</option>
+                  </select>
+                  <!-- <div class="input-group" hidden>
+                    <input type="text" class="form-control" id="InputSecondaryRegion" >
+                  </div> -->
+                </td>
+                </tr>
+                <tr><td><label for="InputSecondaryIP">VNET CIDR :</label></td><td><input type="text"  class="form-control" id="InputSecondaryIP" placeholder="" disabled></td></tr>
+                <tr>
+                  <td><label for="InputSecondaryAZ">Subnet count :</label></td>
+                  <td>
+                    <input required type="text" class="form-control" id="InputSecondaryAZ" placeholder=" Enter the count as 1,2 or 3">
+                    <p><span id="InputSecondaryAZ" style="color: red;"></span></p>
+                  </td>
+                </tr>  
+                <tr>
+                  <td><label for="InputSecondarySubnetsPrivate">VNET Private Subnet CIDRs :</label></td>
+                  <td><input type="text" class="form-control" id="InputSecondarySubnetsPrivate" placeholder="" disabled><p><span id="secondaryprivatesubnetvalidation" style="color: red;"></span></p></td>
+                </tr>
+                <tr>
+                  <td><label for="InputSecondarySubnetsPublic">VNET Public Subnet CIDR :</label></td>
+                  <td><input type="text" class="form-control" id="InputSecondarySubnetsPublic" placeholder="" disabled>
+                    <p><span id="secondarypublicsubnetvalidation" style="color: red;"></span></p></td>
+                </tr>
+              </td>
+                </table>
+          </fieldset>
+          <br>
+
+          <fieldset style="border: 1px solid rgb(0, 174, 255);">
+            <legend
+              style="width:auto; margin-bottom: 0px; font-size: 12px; text-align: left; font-weight: bold; color: #1f497d;">
+              DMZ VNET - Primary Region</legend>
+              <table  style="width:80%; padding-left: 20%; border-collapse: separate;border-spacing: 0 15px;">
+                <td>
+                <tr>
+                  <td><label for="DMZInputPrimaryVNET">DMZ Enable  :<span
+                    id="primary_region_dmz"><b>&nbsp;&nbsp;</b></span></label></td>
+                    <td style="width:58%"><select class="form-control" id="DMZInputPrimaryVNET">
+                      <option value="no" selected="selected">No </option>
+                      <option value="yes">Yes</option>
+                    </select></td>
+                </tr>
+                <tr>
+                  <td><label for="DMZInputPrimaryIP">DMZ VNET CIDR :</label></td>
+                  <td><input type="text" class="form-control" id="DMZInputPrimaryIP" placeholder="">
+                  </td>
+                </tr>
+                <tr>
+                  <td><label for="DMZInputPrimaryAZ">DMZ - No. of AZs for subnets :</label></td>
+                  <td>
+                    <input required type="text" class="form-control" id="DMZInputPrimaryAZ" placeholder=" Enter the count as 1,2 or 3">
+                    <p><span id="DMZInputPrimaryAZ" style="color: red;"></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><label for="DMZInputPrimarySubnets">DMZ VNET Subnet CIDR :</label></td>
+                  <td><input type="text" class="form-control" id="DMZInputPrimarySubnets" placeholder="" ><p><span id="dmzprimarysubnetvalidation" style="color: red;"></span></p></td>
+                </tr>
+                </td>
+              </table>
+          </fieldset>
+          <br>
+          <fieldset style="border: 1px solid rgb(0, 174, 255)">
+            <legend
+              style="width:auto; margin-bottom: 0px; font-size: 12px; text-align: left; font-weight: bold; color: #1f497d;">
+              DMZ VNET - Secondary Region</legend>
+              <table  style="width:80%; padding-left: 20%; border-collapse: separate;border-spacing: 0 15px;">
+                <td>
+                <tr>
+                  <td><label for="DMZInputSecondaryVNET">DMZ Enable VNET :<span
+                    id="secondary_region_dmz"><b>&nbsp;&nbsp;</b></span></label></td>
+                    <td style="width:58%"><select class="form-control" id="DMZInputSecondaryVNET">
+                      <option value="yes">Yes </option>
+                      <option value="no" selected="selected">No</option>
+                    </select>
+                    <!-- <div class="input-group" hidden>
+                      <input type="text" class="form-control" id="DMZInputSecondaryRegion">
+                    </div> -->
+                  </td>
+                  </tr>
+                  <tr>
+                    <td><label for="DMZInputSecondaryIP">DMZ VNET CIDR :</label></td>
+                    <td><input type="text" class="form-control" id="DMZInputSecondaryIP" placeholder="" ></td>
+                  </tr>
+                  <tr>
+                    <td><label for="DMZInputSecondaryAZ">DMZ - No. of AZs for subnets :</label></td>
+                    <td>
+                      <input required type="text" class="form-control" id="DMZInputSecondaryAZ" placeholder=" Enter the count as 1,2 or 3">
+                      <p><span id="DMZInputSecondaryAZ" style="color: red;"></span></p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><label for="DMZInputSecondarySubnets">DMZ VNET Subnet CIDR :</label></td>
+                    <td><input type="text" class="form-control" id="DMZInputSecondarySubnets" placeholder="" ><p><span id="dmzsecondarysubnetvalidation" style="color: red;"></span></p></td>
+                  </tr>
+                </td>
+              </table>
+            
+          </fieldset>
+          <br />
+          <fieldset style="border: 1px solid rgb(0, 174, 255);">
+            <legend
+              style="width:auto; margin-bottom: 0px; font-size: 12px; text-align: left; font-weight: bold; color: #1f497d;">
+              </legend>
+              <table  style="width:80%; padding-left: 20%; border-collapse: separate;border-spacing: 0 15px;">
+            <td>
+            <tr>
+              <td><label for="InputResponsible">System Owner :</label>
+              </td>
+              <td style="width:58%"><div class="form-group">
+                <input required type="text" class="form-control" id="InputResponsible" placeholder="Enter a name">
+                <small id="InputResponsibleHelp" class="form-text text-muted">Your name or the name of the person
+                  responsible for this account.</small>
+              </div></td>
+            </tr>
+            <tr>
+              <td><label for="InputServiceNow">ServiceNow Ticket (REQ#) :</label></td>
+              <td><input required type="text" class="form-control" id="InputServiceNow"  default_if_none="REQ0012345678"
+                 placeholder="REQ0012345678"></td>
+            </tr>
+            <tr>
+              <td><label for="InputCostCenter">Cost Center :</label></td>
+              <td><input required type="text" class="form-control" id="InputCostCenter" aria-describedby="InputCostCenterHelp"
+                placeholder="Enter the Cost Center" minlength="6" maxlength="255">
+              <small id="InputCostCenterHelp" class="form-text text-muted">Minimum 6 Digits (255 max)</small></td>
+            </tr>
+            <tr style="align-items:center;">
+              <td >
+                <button id="submitButton" type="submit" class="btn btn-primary">Submit</button>
+                
+                <button id="resetButton" type="reset" class="btn btn-danger">Reset</button>
+              </td>
+            </tr>
+            </td>
+          </table>
+          </fieldset>
+          <div id="output" class="d-none" role="alert" style="margin-top:9px;"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+   integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+   crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@azure/cosmos@3.14.1/dist/index.min.js"></script>
+  <script type="text/javascript">
+    function validateProjectName(){
+      var x = document.getElementById("InputAppName");
+      var str = x.value;
+	      if (!str.match(/^[a-zA-Z-]{1,14}$/)) {
+          document.getElementById("errorMsg").innerHTML =
+        "Please enter only alphabets and hyphens. Max. limit is 14 chars only.";
+        document.getElementById("InputAppName").focus();
+	      }else{document.getElementById("errorMsg").innerHTML ="";
+      }
+    }
+      var subnetvalidation = true;
+    $("#InputPrimaryAZ").change(function () {
+      var CountPrimarySubnetsPrivate = $("#InputPrimarySubnetsPrivate").val().split(",").length;
+      var CountPrimarySubnetsPublic = $("#InputPrimarySubnetsPublic").val().split(",").length;
+      var CountPrimaryAZ = $("#InputPrimaryAZ").val();
+      if (CountPrimarySubnetsPrivate == CountPrimaryAZ) {
+        subnetvalidation = true;
+        $("#primaryprivatesubnetvalidation").empty();
+        // $("#InputPrimarySubnetsPrivate").removeAttr("required");
+      }
+      else {
+        subnetvalidation = false;
+        $("#primaryprivatesubnetvalidation").empty();
+        $("#primaryprivatesubnetvalidation").append("<b>Error : Please insert the CIDRs equals to Number of AZs</b>");
+        // $("#InputPrimarySubnetsPrivate").attr("required", "true");
+      }
+      if ($("#InputPrimarySubnetsPublic").val().split(",") == "") {
+        CountPrimarySubnetsPublic = 0;
+      }
+      if (CountPrimarySubnetsPublic == CountPrimaryAZ || CountPrimarySubnetsPublic == 0) {
+        subnetvalidation = true;
+        $("#primarypublicsubnetvalidation").empty();
+      }
+      else {
+        subnetvalidation = false;
+        $("#primarypublicsubnetvalidation").empty();
+        $("#primarypublicsubnetvalidation").append("<b>Error : Please insert the CIDRs equals to Number of AZs or leave empty</b>");
+      }
+    }
+    )
+
+    $("#InputSecondaryAZ").change(function () {
+      var CountSecondarySubnetsPrivate = $("#InputSecondarySubnetsPrivate").val().split(",").length;
+      var CountSecondarySubnetsPublic = $("#InputSecondarySubnetsPublic").val().split(",").length;
+      var CountSecondaryAZ = $("#InputSecondaryAZ").val();
+      if (CountSecondarySubnetsPrivate == CountSecondaryAZ) {
+        subnetvalidation = true;
+        $("#secondaryprivatesubnetvalidation").empty();
+      }
+      else {
+        subnetvalidation = false;
+        $("#secondaryprivatesubnetvalidation").empty();
+        $("#secondaryprivatesubnetvalidation").append("<b>Error : Please insert the CIDRs equals to Number of AZs</b>");
+      }
+      if ($("#InputSecondarySubnetsPublic").val().split(",") == "") {
+        CountSecondarySubnetsPublic = 0;
+      }
+      if (CountSecondarySubnetsPublic == CountSecondaryAZ || CountSecondarySubnetsPublic == 0) {
+        subnetvalidation = true;
+        $("#secondarypublicsubnetvalidation").empty();
+      }
+      else {
+        subnetvalidation = false;
+        $("#secondarypublicsubnetvalidation").empty();
+        $("#secondarypublicsubnetvalidation").append("<b>Error : Please insert the CIDRs equals to Number of AZs or leave empty</b>");
+      }
+    }
+    )
+
+
+    $("#InputPrimarySubnetsPrivate").blur(function () {
+      var CountPrimarySubnetsPrivate = $("#InputPrimarySubnetsPrivate").val().split(",").length;
+      var CountPrimaryAZ = $("#InputPrimaryAZ").val();
+      if (CountPrimarySubnetsPrivate == CountPrimaryAZ) {
+        subnetvalidation = true;
+        $("#primaryprivatesubnetvalidation").empty();
+        // $("#InputPrimarySubnetsPrivate").removeAttr("required");
+      }
+      else {
+        subnetvalidation = false;
+        $("#primaryprivatesubnetvalidation").empty();
+        $("#primaryprivatesubnetvalidation").append("<b>Error : Please insert the CIDRs equals to Number of AZs</b>");
+        // $("#InputPrimarySubnetsPrivate").attr("required", "true");
+      }
+    }
+    )
+    $("#InputPrimarySubnetsPublic").blur(function () {
+      var CountPrimarySubnetsPublic = $("#InputPrimarySubnetsPublic").val().split(",").length;
+      var CountPrimaryAZ = $("#InputPrimaryAZ").val();
+      if ($("#InputPrimarySubnetsPublic").val().split(",") == "") {
+        CountPrimarySubnetsPublic = 0;
+      }
+      if (CountPrimarySubnetsPublic == CountPrimaryAZ || CountPrimarySubnetsPublic == 0) {
+        subnetvalidation = true;
+        $("#primarypublicsubnetvalidation").empty();
+      }
+      else {
+        subnetvalidation = false;
+        $("#primarypublicsubnetvalidation").empty();
+        $("#primarypublicsubnetvalidation").append("<b>Error : Please insert the CIDRs equals to Number of AZs or leave empty</b>");
+      }
+    }
+    )
+
+    $("#InputSecondarySubnetsPrivate").blur(function () {
+      var CountSecondarySubnetsPrivate = $("#InputSecondarySubnetsPrivate").val().split(",").length;
+      var CountSecondaryAZ = $("#InputSecondaryAZ").val();
+      if (CountSecondarySubnetsPrivate == CountSecondaryAZ) {
+        subnetvalidation = true;
+        $("#secondaryprivatesubnetvalidation").empty();
+      }
+      else {
+        subnetvalidation = false;
+        $("#secondaryprivatesubnetvalidation").empty();
+        $("#secondaryprivatesubnetvalidation").append("<b>Error : Please insert the CIDRs equals to Number of AZs</b>");
+      }
+    }
+    )
+
+    $("#InputSecondarySubnetsPublic").blur(function () {
+      var CountSecondarySubnetsPublic = $("#InputSecondarySubnetsPublic").val().split(",").length;
+      var CountSecondaryAZ = $("#InputSecondaryAZ").val();
+      if ($("#InputSecondarySubnetsPublic").val().split(",") == "") {
+        CountSecondarySubnetsPublic = 0;
+      }
+      if (CountSecondarySubnetsPublic == CountSecondaryAZ || CountSecondarySubnetsPublic == 0) {
+        subnetvalidation = true;
+        $("#secondarypublicsubnetvalidation").empty();
+      }
+      else {
+        subnetvalidation = false;
+        $("#secondarypublicsubnetvalidation").empty();
+        $("#secondarypublicsubnetvalidation").append("<b>Error : Please insert the CIDRs equals to Number of AZs or leave empty</b>");
+      }
+    }
+    )
+
+    //  DMZ VNET subnet validation 
+
+    $("#DMZInputPrimaryAZ").change(function () {
+      var CountPrimarySubnetsDMZ = $("#DMZInputPrimarySubnets").val().split(",").length;
+      var CountPrimaryAZdmz = $("#DMZInputPrimaryAZ").val();
+      if (CountPrimarySubnetsDMZ == CountPrimaryAZdmz) {
+        subnetvalidation = true;
+        $("#dmzprimarysubnetvalidation").empty();
+        // $("#InputPrimarySubnetsPrivate").removeAttr("required");
+      }
+      else {
+        subnetvalidation = false;
+        $("#dmzprimarysubnetvalidation").empty();
+        $("#dmzprimarysubnetvalidation").append("<b>Error : Please insert the CIDRs equals to Number of AZs</b>");
+        // $("#InputPrimarySubnetsPrivate").attr("required", "true");
+      }
+    }
+    )
+
+    $("#DMZInputSecondaryAZ").change(function () {
+      var CountSecondarySubnetsDMZ = $("#DMZInputSecondarySubnets").val().split(",").length;
+      var CountSecondaryAZdmz = $("#DMZInputSecondaryAZ").val();
+      if (CountSecondarySubnetsDMZ == CountSecondaryAZdmz) {
+        subnetvalidation = true;
+        $("#dmzsecondarysubnetvalidation").empty();
+      }
+      else {
+        subnetvalidation = false;
+        $("#dmzsecondarysubnetvalidation").empty();
+        $("#dmzsecondarysubnetvalidation").append("<b>Error : Please insert the CIDRs equals to Number of AZs</b>");
+      }
+    }
+    )
+
+    $("#DMZInputPrimarySubnets").blur(function () {
+      var CountPrimarySubnetsDMZ = $("#DMZInputPrimarySubnets").val().split(",").length;
+      var CountPrimaryAZdmz = $("#DMZInputPrimaryAZ").val();
+      if (CountPrimarySubnetsDMZ == CountPrimaryAZdmz) {
+        subnetvalidation = true;
+        $("#dmzprimarysubnetvalidation").empty();
+        // $("#InputPrimarySubnetsPrivate").removeAttr("required");
+      }
+      else {
+        subnetvalidation = false;
+        $("#dmzprimarysubnetvalidation").empty();
+        $("#dmzprimarysubnetvalidation").append("<b>Error : Please insert the CIDRs equals to Number of AZs</b>");
+        // $("#InputPrimarySubnetsPrivate").attr("required", "true");
+      }
+    }
+    )
+
+    $("#DMZInputSecondarySubnets").blur(function () {
+      var CountSecondarySubnetsDMZ = $("#DMZInputSecondarySubnets").val().split(",").length;
+      var CountSecondaryAZdmz = $("#DMZInputSecondaryAZ").val();
+      if (CountSecondarySubnetsDMZ == CountSecondaryAZdmz) {
+        subnetvalidation = true;
+        $("#dmzsecondarysubnetvalidation").empty();
+      }
+      else {
+        subnetvalidation = false;
+        $("#dmzsecondarysubnetvalidation").empty();
+        $("#dmzsecondarysubnetvalidation").append("<b>Error : Please insert the CIDRs equals to Number of AZs</b>");
+      }
+    }
+    )
+
+    $("#InputPrimaryRegion").change(function () {
+      $("#primary_region").empty();
+      $("#secondary_region").empty();
+      $("#primary_region_dmz").empty();
+      $("#secondary_region_dmz").empty();
+      var val = $(this).val();
+      if (val == "central-us") {
+        // $("#primary_region").val("central-us");
+        $("#primary_region").append("<b>&nbsp;&nbsp;(CENTRAL US)</b>");
+        $("#secondary_region").append("<b>&nbsp;&nbsp;(SOUTH CENTRAL US)</b>");
+        $("#InputSecondaryRegion").val("south-central-us");
+        $("#primary_region_dmz").append("<b>&nbsp;&nbsp;(CENTRAL US)</b>");
+        $("#secondary_region_dmz").append("<b>&nbsp;&nbsp;(SOUTH CENTRAL US)</b>");
+        $("#DMZInputSecondaryRegion").val("south-central-us");
+
+      } else if (val == "south-central-us") {
+        $("#primary_region").append("<b>&nbsp;&nbsp;(SOUTH CENTRAL US)</b>");
+        $("#secondary_region").append("<b>&nbsp;&nbsp;(CENTRAL US)</b>");
+        $("#InputSecondaryRegion").val("central-us");
+        $("#primary_region_dmz").append("<b>&nbsp;&nbsp;(SOUTH CENTRAL US)</b>");
+        $("#secondary_region_dmz").append("<b>&nbsp;&nbsp;(CENTRAL US)</b>");
+        $("#DMZInputSecondaryRegion").val("central-us");
+      }
+
+    })
+
+    $("#InputFunction").change(function () {
+      var selectOne = "<option value='NA' selected disabled>--select one--</option>"
+      if ($("#InputFunction").val() == "ADM") {
+        $("#InputSubFunction").removeAttr("disabled");
+        $("#InputSubFunction").html(selectOne + " <option value = 'BI' > Business Insurance</option ><option value = 'Claims' > Claims</option ><option value = 'Distribution' > Distribution</option ><option value = 'IA' > Independent Agent</option ><option value = 'Marketing' > Marketing</option ><option value = 'PSLN' > Personal Lines</option ><option value = 'QA_COE' > QA COE</option ><option value = 'SVCOPS' > Service Operations</option >")
+
+      }
+      else if ($("#InputFunction").val() == "CAP") {
+        $("#InputSubFunction").removeAttr("disabled");
+        $("#InputSubFunction").html(selectOne + " <option value = 'CAP' > CAP</option >")
+      }
+      else if ($("#InputFunction").val() == "CENTRAL") {
+        $("#InputSubFunction").removeAttr("disabled");
+        $("#InputSubFunction").html(selectOne + " <option value = 'Global_HR' > Global HR</option >")
+      }
+      else if ($("#InputFunction").val() == "EDO") {
+        $("#InputSubFunction").removeAttr("disabled");
+        $("#InputSubFunction").html(selectOne + " <option value = 'Claims_BI' > Claims BI</option ><option value = 'EDO_Efficiency' > EDO Efficiency</option ><option value = 'Enterprise_BI' > Enterprise BI</option ><option value = 'EDMGT' > Enterprise Data Management</option ><option value = 'FED' > Financial Engine & Data</option >")
+      }
+      else if ($("#InputFunction").val() == "FIS") {
+        $("#InputSubFunction").removeAttr("disabled");
+        $("#InputSubFunction").html(selectOne + " <option value = 'FIS' > FIS</option >")
+      }
+      else if ($("#InputFunction").val() == "FNWL") {
+        $("#InputSubFunction").removeAttr("disabled");
+        $("#InputSubFunction").html(selectOne + " <option value = 'FNWL' > FNWL</option ><option value = 'FNWL_Act' > FNWL - Actuarial</option ><option value = 'FNWL_Claims' > FNWL - Claims</option ><option value = 'FNWL_Executive' > FNWL - Executive</option ><option value = 'FNWL_FOPS' > FNWL - Financial Operations</option ><option value = 'FNWL_IT' > FNWL - IT</option >")
+      }
+      else if ($("#InputFunction").val() == "IO") {
+        $("#InputSubFunction").removeAttr("disabled");
+        $("#InputSubFunction").html(selectOne + " <option value = 'Client_Services' > Client Services</option ><option value = 'Core_Infra' > Core Infrastructure</option ><option value = 'EA' > Enterprise Architecture</option ><option value = 'EPS' > Enterprise Platform Systems</option ><option value = 'IOA' > Infrastructure Operations Administration</option ><option value = 'ISS' > Infrastructure Shared Services</option ><option value = 'IL' > Innovation Lab</option ><option value = 'JV' > Joint Venture</option ><option value = 'NTS' > Network & Telecom Services</option ><option value = 'PD' > Print & Distribution</option >")
+      }
+      else if ($("#InputFunction").val() == "MAPLE") {
+        $("#InputSubFunction").removeAttr("disabled");
+        $("#InputSubFunction").html(selectOne + " <option value = 'MAPLE' > MAPLE</option >")
+      }
+      else if ($("#InputFunction").val() == "OCIO") {
+        $("#InputSubFunction").removeAttr("disabled");
+        $("#InputSubFunction").html(selectOne + " <option value = 'BC' > Business Continuity</option ><option value = 'CITS' > Corporate IT Services</option ><option value = 'ES' > Executive Support</option ><option value = 'GOV' > Governance</option ><option value = 'ITBM' > IT Business Management</option ><option value = 'ITF' > IT Finance</option ><option value = 'ITS' > IT Strategy</option ><option value = 'PROJM' > Project Management</option ><option value = 'SC' > Software Compliance</option >")
+      }
+      else {
+        $("#InputSubFunction").html("<option value='NA'>--select one--</option>");
+        $("#InputSubFunction").attr("disabled", "true");
+      }
+    })
+
+    var ServiceUnitValidationFlag = true;
+    $("#InputServiceUnit").change(function () {
+      $("#ServiceUnitValidation").empty();
+      var str = $("#InputServiceUnit").val();
+      ServiceUnitValidationFlag = true;
+      if (str.indexOf('&') > -1) {
+        ServiceUnitValidationFlag = false;
+      }
+      if (ServiceUnitValidationFlag == false) {
+        $("#ServiceUnitValidation").empty();
+        $("#ServiceUnitValidation").append("<b>Error : Please do not include '&'</b>");
+      }
+
+    })
+    
+    $("#InputSubscriptionType").change(function () {
+      var selectOne = "<option value='NA' selected disabled>--select one--</option>"
+      var selectNo = "<option value='no'>No</option>"
+      var selectYes = "<option value='yes'>Yes</option>"
+      var val = $(this).val();
+      
+      if (val == "app" || val == "poc") {
+        $("#InputUID").removeAttr("disabled");
+        $("#InputPrimaryIP").removeAttr("disabled");
+        $("#InputFunction").removeAttr("disabled");
+        $("#InputPrimaryIP").val("");
+        $("#InputPrimaryVNET").removeAttr("disabled");
+        $("#InputPrimaryVNET").html("<option value='yes' selected='selected'>Yes </option>" + selectNo);
+        $("#InputPrimaryAZ").removeAttr("disabled");
+
+        $("#InputPrimarySubnetsPublic").removeAttr("disabled");
+        $("#InputPrimarySubnetsPublic").val("");
+        $("#InputPrimarySubnetsPrivate").removeAttr("disabled");
+        $("#InputPrimarySubnetsPrivate").val("");
+
+        $("#InputSecondaryVNET").removeAttr("disabled");
+        $("#InputSecondaryVNET").html("<option value='no' selected='selected'>No </option>" + selectYes);
+        $("#InputSecondarySubnetsPublic").val("");
+        $("#InputSecondarySubnetsPrivate").val("");
+
+        $("#DMZInputPrimaryVNET").removeAttr("disabled");
+        $("#DMZInputPrimaryVNET").html("<option value='no' selected='selected'>No </option>" + selectYes);
+        $("#DMZInputPrimaryIP").val("");
+        $("#DMZInputPrimarySubnets").val("");
+        $("#DMZInputSecondaryVNET").html("<option value='no' selected='selected'>No </option>" + selectYes);
+        $("#DMZInputSecondarySubnets").val("");
+
+        $("#InputPrimaryVNET").change(function () {
+          var enableVNET = $(this).val();
+          if (enableVNET == "no") {
+            $("#InputPrimaryAZ").attr("disabled", "true");
+            $("#InputPrimarySubnetsPublic").attr("disabled", "true");
+            $("#InputPrimarySubnetsPublic").val("");
+            if ($("#InputPrimarySubnetsPublic").val() == "") {
+              $("#primarypublicsubnetvalidation").empty();
+            }
+            $("#InputPrimarySubnetsPrivate").attr("disabled", "true");
+            $("#InputPrimarySubnetsPrivate").val("");
+            if ($("#InputPrimarySubnetsPrivate").val() == "") {
+              $("#primaryprivatesubnetvalidation").empty();
+            }
+            $("#InputPrimaryIP").attr("disabled", "true");
+            $("#InputPrimaryIP").val("");
+			
+            $("#InputSecondaryVNET").val("no");
+            $("#InputSecondaryVNET").attr("disabled", "true");
+						
+            $("#InputSecondaryAZ").attr("disabled", "true");
+            $("#InputSecondarySubnetsPublic").attr("disabled", "true");
+            $("#InputSecondarySubnetsPublic").val("")
+            if ($("#InputSecondarySubnetsPublic").val() == "") {
+              $("#secondarypublicsubnetvalidation").empty();
+            }
+            $("#InputSecondarySubnetsPrivate").attr("disabled", "true");
+            $("#InputSecondarySubnetsPrivate").val("")
+            if ($("#InputSecondarySubnetsPrivate").val() == "") {
+              $("#secondaryprivatesubnetvalidation").empty();
+            }
+            $("#InputSecondaryIP").attr("disabled", "true");
+            $("#InputSecondaryIP").val("100.64.0.0/16")
+
+            $("#DMZInputPrimaryVNET").val("no");
+                  $("#DMZInputPrimaryVNET").attr("disabled", "true");
+            $("#DMZInputPrimaryIP").attr("disabled", "true");
+                  $("#DMZInputPrimaryIP").val("");
+            $("#DMZInputPrimaryAZ").attr("disabled", "true");
+            $("#DMZInputPrimarySubnets").attr("disabled", "true");
+                }else if (enableVNET == "yes") {
+            $("#InputPrimaryAZ").removeAttr("disabled");
+            $("#InputPrimarySubnetsPublic").removeAttr("disabled");
+            $("#InputPrimarySubnetsPublic").val("");
+            $("#InputPrimarySubnetsPrivate").removeAttr("disabled");
+            $("#InputPrimarySubnetsPrivate").val("");
+
+            $("#InputPrimaryIP").removeAttr("disabled");
+            $("#InputPrimaryIP").val("");
+
+            $("#InputSecondaryVNET").html("<option value='no' selected='selected'>No </option>" + selectYes);
+            $("#InputSecondaryVNET").removeAttr("disabled");
+      			$("#DMZInputPrimaryVNET").html("<option value='no' selected='selected'>No </option>" + selectYes);
+            $("#DMZInputPrimaryVNET").removeAttr("disabled");
+		  }
+        });
+        $("#InputSecondaryVNET").change(function () {
+          var enableVNET = $(this).val();
+          if (enableVNET == "no") {
+            $("#InputSecondaryAZ").attr("disabled", "true");
+            $("#InputSecondarySubnetsPublic").attr("disabled", "true");
+            $("#InputSecondarySubnetsPublic").val("");
+            if ($("#InputSecondarySubnetsPublic").val() == "") {
+              $("#secondarypublicsubnetvalidation").empty();
+            }
+            $("#InputSecondarySubnetsPrivate").attr("disabled", "true");
+            $("#InputSecondarySubnetsPrivate").val("");
+            if ($("#InputSecondarySubnetsPrivate").val() == "") {
+              $("#secondaryprivatesubnetvalidation").empty();
+            }
+            $("#InputSecondaryIP").attr("disabled", "true");
+            $("#InputSecondaryIP").val("100.64.0.0/16")
+      			$("#DMZInputSecondaryVNET").attr("disabled", "true");
+            $("#DMZInputSecondaryVNET").val("no");
+          } else if (enableVNET == "yes") {
+            $("#InputSecondaryAZ").removeAttr("disabled");
+            $("#InputSecondarySubnetsPublic").removeAttr("disabled");
+            $("#InputSecondarySubnetsPublic").val("");
+            $("#InputSecondarySubnetsPrivate").removeAttr("disabled");
+            $("#InputSecondarySubnetsPrivate").val("");
+            $("#InputSecondaryIP").removeAttr("disabled");
+            $("#InputSecondaryIP").val("");
+			      $("#DMZInputSecondaryVNET").html("<option value='no' selected='selected'>No </option>" + selectYes);
+			      $("#DMZInputSecondaryVNET").removeAttr("disabled");
+          }
+        });
+        $("#DMZInputPrimaryVNET").change(function () {
+          var enableVNET = $(this).val();
+          if (enableVNET == "no") {
+            $("#DMZInputPrimaryAZ").attr("disabled", "true");
+            $("#DMZInputPrimarySubnets").attr("disabled", "true");
+            $("#DMZInputPrimarySubnets").val("");
+            if ($("#DMZInputPrimarySubnets").val() == "") {
+              $("#dmzprimarysubnetvalidation").empty();
+            }
+            $("#DMZInputPrimaryIP").attr("disabled", "true");
+            $("#DMZInputPrimaryIP").val("");
+            $("#DMZInputSecondaryVNET").attr("disabled", "true");
+            $("#DMZInputSecondaryVNET").val("no");
+            $("#DMZInputSecondaryAZ").attr("disabled", "true");
+            $("#DMZInputSecondarySubnets").attr("disabled", "true");
+            $("#DMZInputSecondarySubnets").val("")
+            if ($("#DMZInputSecondarySubnets").val() == "") {
+              $("#dmzsecondarysubnetvalidation").empty();
+            }
+            $("#DMZInputSecondaryIP").attr("disabled", "true");
+            $("#DMZInputSecondaryIP").val("")
+          } else if (enableVNET == "yes") {
+      		  $("#DMZInputPrimaryAZ").removeAttr("disabled");
+            $("#DMZInputPrimarySubnets").removeAttr("disabled");
+            $("#DMZInputPrimarySubnets").val("");
+            $("#DMZInputPrimaryIP").removeAttr("disabled");
+            $("#DMZInputPrimaryIP").val("");
+            $("#DMZInputSecondaryVNET").html("<option value='no' selected='selected'>No </option>" + selectYes);
+            $("#DMZInputSecondaryVNET").removeAttr("disabled");  
+		  }
+        });
+        $("#DMZInputSecondaryVNET").change(function () {
+          var enableVNET = $(this).val();
+          if (enableVNET == "no") {
+            $("#DMZInputSecondaryAZ").attr("disabled", "true");
+            $("#DMZInputSecondarySubnets").attr("disabled", "true");
+            $("#DMZInputSecondarySubnets").val("");
+            if ($("#DMZInputSecondarySubnets").val() == "") {
+              $("#dmzsecondarysubnetvalidation").empty();
+            }
+            $("#DMZInputSecondaryIP").attr("disabled", "true");
+            $("#DMZInputSecondaryIP").val("")
+          } else if (enableVNET == "yes") {
+            $("#DMZInputSecondaryAZ").removeAttr("disabled");
+            $("#DMZInputSecondarySubnets").removeAttr("disabled");
+            $("#DMZInputSecondarySubnets").val("");
+            $("#DMZInputSecondaryIP").removeAttr("disabled");
+            $("#DMZInputSecondaryIP").val("");
+          }
+        });
+        if ($("#InputSubscriptionType").val() == "poc") {
+          $("#InputEnvironmentType").html("<option value='poc'>POC</option>");
+          $("#InputEnvironmentType").attr("disabled", "true");
+        }
+        else {
+          $("#InputEnvironmentType").removeAttr("disabled");
+          $("#InputEnvironmentType").html(selectOne + "<option value='prod'>Production</option><option value='pre-prod'>Pre-Production</option><option value='shared'>Shared-Services</option><option value='dev'>Development</option><option value='qa'>Quality Assurance</option>")
+        }
+        $("#InputFunction").html(selectOne + " <option value='ADM'>ADM</option> <option value='CAP'>CAP</option> <option value='CENTRAL'>CENTRAL</option> <option value='EDO'>EDO</option> <option value='FIS'>FIS</option> <option value='FNWL'>FNWL</option> <option value='IO'>IO</option> <option value='MAPLE'>MAPLE</option>")
+        } else if (val == "core") {
+          $("#InputEnvironmentType").removeAttr("disabled");
+          $("#InputEnvironmentType").html(selectOne + "<option value='prod'>Production</option><option value='pre-prod'>Pre-Production</option><option value='shared'>Shared-Services</option><option value='dev'>Development</option><option value='qa'>Quality Assurance</option>")
+          $("#InputFunction").attr("disabled", "true");
+            $("#InputPrimaryVNET").val("no");
+            $("#InputPrimaryVNET").attr("disabled", "true");
+
+        } else if (val == "sandbox") {
+        $("#InputEnvironmentType").html("<option value='sbx'>Sandbox</option>");
+        $("#InputEnvironmentType").attr("disabled", "true");
+        $("#InputUID").removeAttr("disabled");
+        $("#InputFunction").removeAttr("disabled");
+        $("#InputPrimaryIP").attr("disabled", "true");
+        $("#InputPrimaryIP").val("192.168.0.0/17");
+        $("#InputSecondaryIP").val("192.168.128.0/17");
+        $("#InputFunction").html(selectOne + " <option value='ADM'>ADM</option> <option value='CAP'>CAP</option> <option value='CENTRAL'>CENTRAL</option> <option value='EDO'>EDO</option> <option value='FIS'>FIS</option> <option value='FNWL'>FNWL</option> <option value='IO'>IO</option> <option value='MAPLE'>MAPLE</option>")
+        $("#InputPrimaryVNET").removeAttr("disabled");
+        $("#InputPrimaryVNET").html("<option value='yes' selected='selected'>Yes </option>" + selectNo);
+        $("#InputPrimaryAZ").attr("disabled", "true");
+        $("#InputPrimarySubnetsPublic").attr("disabled", "true");
+        $("#InputPrimarySubnetsPublic").val("")
+        $("#InputPrimarySubnetsPrivate").attr("disabled", "true");
+        $("#InputPrimarySubnetsPrivate").val("")
+        $("#InputSecondaryVNET").removeAttr("disabled");
+        $("#InputSecondaryVNET").html("<option value='no' selected='selected'>No </option>" + selectYes);
+        $("#InputSecondaryAZ").attr("disabled", "true");
+        $("#InputSecondarySubnetsPublic").attr("disabled", "true");
+        $("#InputSecondarySubnetsPublic").val("")
+        $("#InputSecondarySubnetsPrivate").attr("disabled", "true");
+        $("#InputSecondarySubnetsPrivate").val("")
+        $("#InputSecondaryIP").attr("disabled", "true");
+
+        $("#DMZInputPrimaryVNET").attr("disabled", "true");
+        $("#DMZInputPrimaryVNET").val("no")
+		    $("#DMZInputPrimaryIP").attr("disabled", "true");
+        $("#DMZInputPrimaryIP").val("")
+        $("#DMZInputPrimaryAZ").attr("disabled", "true");
+        $("#DMZInputPrimarySubnets").attr("disabled", "true");
+        $("#DMZInputPrimarySubnets").val("")
+        $("#dmzprimarysubnetvalidation").empty();
+
+        $("#DMZInputSecondaryVNET").attr("disabled", "true");
+        $("#DMZInputSecondaryVNET").val("no")
+        $("#DMZInputSecondaryIP").attr("disabled", "true");
+        $("#DMZInputSecondaryIP").val("")
+        $("#DMZInputSecondaryAZ").attr("disabled", "true");
+        $("#DMZInputSecondarySubnets").attr("disabled", "true");
+        $("#DMZInputSecondarySubnets").val("")
+        $("#dmzsecondarysubnetvalidation").empty();
+		
+		$("#InputPrimaryVNET").change(function () {
+          var enableVNET = $(this).val();
+          if (enableVNET == "no") {
+            $("#InputPrimaryAZ").attr("disabled", "true");
+            $("#InputPrimarySubnetsPublic").attr("disabled", "true");
+            $("#InputPrimarySubnetsPublic").val("");
+            if ($("#InputPrimarySubnetsPublic").val() == "") {
+              $("#primarypublicsubnetvalidation").empty();
+            }
+            $("#InputPrimarySubnetsPrivate").attr("disabled", "true");
+            $("#InputPrimarySubnetsPrivate").val("");
+            if ($("#InputPrimarySubnetsPrivate").val() == "") {
+              $("#primaryprivatesubnetvalidation").empty();
+            }
+            $("#InputPrimaryIP").attr("disabled", "true");
+            $("#InputPrimaryIP").val("");
+			
+            $("#InputSecondaryVNET").val("no");
+            $("#InputSecondaryVNET").attr("disabled", "true");
+						
+            $("#InputSecondaryAZ").attr("disabled", "true");
+            $("#InputSecondarySubnetsPublic").attr("disabled", "true");
+            $("#InputSecondarySubnetsPublic").val("")
+            if ($("#InputSecondarySubnetsPublic").val() == "") {
+              $("#secondarypublicsubnetvalidation").empty();
+            }
+            $("#InputSecondarySubnetsPrivate").attr("disabled", "true");
+            $("#InputSecondarySubnetsPrivate").val("")
+            if ($("#InputSecondarySubnetsPrivate").val() == "") {
+              $("#secondaryprivatesubnetvalidation").empty();
+            }
+            $("#InputSecondaryIP").attr("disabled", "true");
+            $("#InputSecondaryIP").val("100.64.0.0/16")
+
+            $("#DMZInputPrimaryVNET").val("no");
+                  $("#DMZInputPrimaryVNET").attr("disabled", "true");
+            $("#DMZInputPrimaryIP").attr("disabled", "true");
+                  $("#DMZInputPrimaryIP").val("");
+            $("#DMZInputPrimaryAZ").attr("disabled", "true");
+            $("#DMZInputPrimarySubnets").attr("disabled", "true");
+                }else if (enableVNET == "yes") {
+            $("#InputPrimaryAZ").removeAttr("disabled");
+            $("#InputPrimarySubnetsPublic").removeAttr("disabled");
+            $("#InputPrimarySubnetsPublic").val("");
+            $("#InputPrimarySubnetsPrivate").removeAttr("disabled");
+            $("#InputPrimarySubnetsPrivate").val("");
+            $("#InputPrimaryIP").removeAttr("disabled");
+            $("#InputPrimaryIP").val("");
+           
+            $("#InputSecondaryVNET").html("<option value='no' selected='selected'>No </option>" + selectYes);
+            $("#InputSecondaryVNET").removeAttr("disabled");
+			$("#DMZInputPrimaryVNET").html("<option value='no' selected='selected'>No </option>" + selectYes);
+            $("#DMZInputPrimaryVNET").removeAttr("disabled");
+		  }
+        });
+        $("#DMZInputPrimaryVNET").change(function () {
+          var enableVNET = $(this).val();
+          if (enableVNET == "no") {
+            $("#DMZInputPrimaryAZ").attr("disabled", "true");
+            $("#DMZInputPrimarySubnets").attr("disabled", "true");
+            $("#DMZInputPrimarySubnets").val("");
+            if ($("#DMZInputPrimarySubnets").val() == "") {
+              $("#dmzprimarysubnetvalidation").empty();
+            }
+            $("#DMZInputPrimaryIP").attr("disabled", "true");
+            $("#DMZInputPrimaryIP").val("");
+            $("#DMZInputSecondaryVNET").attr("disabled", "true");
+            $("#DMZInputSecondaryVNET").val("no");
+            $("#DMZInputSecondaryAZ").attr("disabled", "true");
+            $("#DMZInputSecondarySubnets").attr("disabled", "true");
+            $("#DMZInputSecondarySubnets").val("")
+            if ($("#DMZInputSecondarySubnets").val() == "") {
+              $("#dmzsecondarysubnetvalidation").empty();
+            }
+            $("#DMZInputSecondaryIP").attr("disabled", "true");
+            $("#DMZInputSecondaryIP").val("")
+          } else if (enableVNET == "yes") {
+	      	  $("#DMZInputPrimaryAZ").removeAttr("disabled");
+            $("#DMZInputPrimarySubnets").removeAttr("disabled");
+            $("#DMZInputPrimarySubnets").val("");
+
+            $("#DMZInputPrimaryIP").removeAttr("disabled");
+            $("#DMZInputPrimaryIP").val("");
+            $("#DMZInputSecondaryVNET").html("<option value='no' selected='selected'>No </option>" + selectYes);
+            $("#DMZInputSecondaryVNET").removeAttr("disabled");  
+		  }
+        });
+
+        $("#DMZInputSecondaryVNET").change(function () {
+          var enableVNET = $(this).val();
+          if (enableVNET == "no") {
+            $("#DMZInputSecondaryAZ").attr("disabled", "true");
+            $("#DMZInputSecondarySubnets").attr("disabled", "true");
+            $("#DMZInputSecondarySubnets").val("");
+            if ($("#DMZInputSecondarySubnets").val() == "") {
+              $("#dmzsecondarysubnetvalidation").empty();
+            }
+            $("#DMZInputSecondaryIP").attr("disabled", "true");
+            // $("#InputSecondaryIP").val("NA");
+            $("#DMZInputSecondaryIP").val("")
+
+          } else if (enableVNET == "yes") {
+            $("#DMZInputSecondaryAZ").removeAttr("disabled");
+            $("#DMZInputSecondarySubnets").removeAttr("disabled");
+            $("#DMZInputSecondarySubnets").val("");
+            $("#DMZInputSecondaryIP").removeAttr("disabled");
+            $("#DMZInputSecondaryIP").val("");
+          }
+        });
+		
+        $("#InputSecondaryVNET").change(function () {
+          var enableVNET = $(this).val();
+          if (enableVNET == "no") {
+            $("#InputSecondaryAZ").attr("disabled", "true");
+            $("#InputSecondarySubnetsPublic").attr("disabled", "true");
+            $("#InputSecondarySubnetsPublic").val("");
+            if ($("#InputSecondarySubnetsPublic").val() == "") {
+              $("#secondarypublicsubnetvalidation").empty();
+            }
+            $("#InputSecondarySubnetsPrivate").attr("disabled", "true");
+            $("#InputSecondarySubnetsPrivate").val("");
+            if ($("#InputSecondarySubnetsPrivate").val() == "") {
+              $("#secondaryprivatesubnetvalidation").empty();
+            }
+            $("#InputSecondaryIP").attr("disabled", "true");
+            $("#InputSecondaryIP").val("100.64.0.0/16")
+		      	$("#DMZInputSecondaryVNET").attr("disabled", "true");
+            $("#DMZInputSecondaryVNET").val("no");
+          } else if (enableVNET == "yes") {
+            $("#InputSecondaryAZ").removeAttr("disabled");
+            $("#InputSecondarySubnetsPublic").removeAttr("disabled");
+            $("#InputSecondarySubnetsPublic").val("");
+            $("#InputSecondarySubnetsPrivate").removeAttr("disabled");
+            $("#InputSecondarySubnetsPrivate").val("");
+            $("#InputSecondaryIP").removeAttr("disabled");
+            $("#InputSecondaryIP").val("");
+		      	$("#DMZInputSecondaryVNET").html("<option value='no' selected='selected'>No </option>" + selectYes);
+		      	$("#DMZInputSecondaryVNET").removeAttr("disabled");
+          }
+        });
+      } else {
+        $("#InputEnvironmentType").html(selectOne + "<option value='prod'>Production</option><option value='pre-prod'>Pre-Production</option><option value='shared'>Shared-Services</option><option value='dev'>Development</option><option value='qa'>Quality Assurance</option>")
+        $("#InputEnvironmentType").removeAttr("disabled");
+        $("#InputUID").attr("disabled", "true");
+        $("#InputPrimaryIP").attr("disabled", "true");
+        $("#InputFunction").attr("disabled", "true");
+        $("#InputPrimaryIP").val("");
+        $("#InputSecondaryIP").val("192.168.0.0/16");
+        $("#InputPrimaryVNET").html(selectNo);
+        $("#InputPrimaryVNET").attr("disabled", "true");
+        $("#InputPrimaryAZ").attr("disabled", "true");
+        $("#InputPrimarySubnetsPublic").attr("disabled", "true");
+        $("#InputPrimarySubnetsPublic").val("")
+        $("#InputPrimarySubnetsPrivate").attr("disabled", "true");
+        $("#InputPrimarySubnetsPrivate").val("")
+        // $("#InputSecondaryIP").val("NA");
+        // $("#InputSecondaryIP").val("192.168.0.0/16");
+        $("#InputSecondaryVNET").html(selectNo);
+        $("#InputSecondaryVNET").attr("disabled", "true");
+        $("#InputSecondaryAZ").attr("disabled", "true");
+        $("#InputSecondarySubnetsPublic").attr("disabled", "true");
+        $("#InputSecondarySubnetsPublic").val("")
+        $("#InputSecondarySubnetsPrivate").attr("disabled", "true");
+        $("#InputSecondarySubnetsPrivate").val("")
+      }
+    });
+    //Loop through the HTML fields and capture any input elements that have an id.
+    //Return a JSON object of id:value propeties
+    var privatePrimarySubnetValidation = "";
+    var privateSecondarySubnetValidation = "";
+    var toJSONString = function (form) {
+      var obj = {};
+      var elements = form.querySelectorAll("input, select, textarea");
+      for (var i = 0; i < elements.length; ++i) {
+        var element = elements[i];
+        var name = element.id;
+        var value = element.value;
+        if ((element.id == "InputPrimarySubnetsPublic") && (element.value == "")) {
+          element.value = ""
+          value = element.value
+        }
+        if ((element.id == "InputPrimarySubnetsPrivate") && (element.value == "")) {
+          console.log("Private" + element.value)
+          element.value = ""
+          value = element.value
+        }
+        if ((element.id == "InputSecondarySubnetsPublic") && (element.value == "")) {
+          element.value = ""
+          value = element.value
+        }
+        if ((element.id == "InputSecondarySubnetsPrivate") && (element.value == "")) {
+          element.value = ""
+          value = element.value
+        }
+
+        if ((element.id == "InputUID") && (element.value == "")) {
+          element.value = "NA"
+          value = element.value
+        }
+        if (name) {
+          obj[name] = value;
+        }
+      }
+      console.log(JSON.stringify(obj))
+      return JSON.stringify(obj);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      var form = document.getElementById("requestForm");
+      var output = document.getElementById("output");
+      var btn = document.getElementById('submitButton');
+      form.addEventListener("reset", function (e) {
+        btn.removeAttribute("disabled")
+        $("#primaryprivatesubnetvalidation").empty();
+        $("#primarypublicsubnetvalidation").empty();
+        $("#secondaryprivatesubnetvalidation").empty();
+        $("#secondarypublicsubnetvalidation").empty();
+        $("#ServiceUnitValidation").empty();
+      });
+      
+      form.addEventListener("submit", function (e) {
+        //Hide output and disable submit
+        if (subnetvalidation && ServiceUnitValidationFlag) {
+         // output.setAttribute("class", "d-none");
+          btn.setAttribute("disabled", "true");
+          e.preventDefault();
+          //console.log("test" + subnetvalidation + ServiceUnitValidationFlag);
+          //Get JSON
+          var json = toJSONString(this);
+          console.log("Generating payload from Form Data -> \n" + json);
+          
+        //var url = "http://localhost:3000/addtask"; 
+        
+          var url = "https://"+window.location.hostname+"/addtask"
+          console.log(url);
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", url);
+
+          xhr.setRequestHeader("Accept", "application/json");
+          xhr.setRequestHeader("Content-Type", "application/json");
+
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+              console.log(xhr.status);
+              console.log(xhr.responseText);
+            }
+           // alert(xhr.status)
+           // alert(xhr.responseText)
+          };
+
+          xhr.send(json);
+          alert("Success! \n Your request has been received. \n You will receive an email confirmation once the request has been processed.")
+        }
+        else {
+          e.preventDefault();
+          alert("ERROR! \nPlease check your inputs and resubmit the form!")
+        }
+      });
+    });
+    </script>
+  </body>
+</html>
